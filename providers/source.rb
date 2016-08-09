@@ -32,7 +32,7 @@ action :create do
     # common parameters
     params = []
     params << ['Module', n.input_module]
-    params << ['Exec', n.exec] if n.exec
+    params.push(*n.exec) if n.exec
     params << ['InputType', n.input_type] if n.input_type
     params << ['FlowControl',
                n.flow_control.to_s.upcase] unless n.flow_control.nil?
@@ -126,6 +126,8 @@ action :create do
 
     end
 
+    processors = [*n.processor]
+
     destinations = [*n.destination]
     destinations.map! { |v| v == :defaults ? '%DEFAULT_OUTPUTS%' : v }
 
@@ -136,6 +138,7 @@ action :create do
 
       variables name: n.name,
                 params: params,
+                processors: processors,
                 destinations: destinations
 
       notifies :restart, 'service[nxlog]', :delayed

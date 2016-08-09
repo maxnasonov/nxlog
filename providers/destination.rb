@@ -25,9 +25,6 @@ def config_filename(name)
   "#{node['nxlog']['conf_dir']}/nxlog.conf.d/10_op_#{name}.conf"
 end
 
-def default_filename(name)
-  "#{node['nxlog']['conf_dir']}/nxlog.conf.d/op_#{name}.default"
-end
 
 action :create do
   converge_by("Create #{new_resource}") do
@@ -129,14 +126,6 @@ action :create do
       notifies :restart, 'service[nxlog]', :delayed
     end
 
-    # create default definition file if this is a default destination
-    template default_filename(n.name) do
-      cookbook 'nxlog'
-      source 'resources/destination.default.erb'
-      variables name: n.name
-      notifies :restart, 'service[nxlog]', :delayed
-      only_if { n.default }
-    end
   end
 end
 

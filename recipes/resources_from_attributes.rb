@@ -31,7 +31,28 @@ def symbolize_attrs(obj)
   end
 end
 
+config_filenames = []
+
+symbolize_attrs(node['nxlog']['extensions'] || {}).each_pair do |name, values|
+  config_filenames << "30_ext_#{name}.conf"
+  nxlog_extension name do
+    values.each_pair do |key, value|
+      public_send(key, value)
+    end
+  end
+end
+
+symbolize_attrs(node['nxlog']['processors'] || {}).each_pair do |name, values|
+  config_filenames << "40_proc_#{name}.conf"
+  nxlog_processor name do
+    values.each_pair do |key, value|
+      public_send(key, value)
+    end
+  end
+end
+
 symbolize_attrs(node['nxlog']['sources'] || {}).each_pair do |name, values|
+  config_filenames << "20_ip_#{name}.conf"
   nxlog_source name do
     values.each_pair do |key, value|
       public_send(key, value)
@@ -40,6 +61,7 @@ symbolize_attrs(node['nxlog']['sources'] || {}).each_pair do |name, values|
 end
 
 symbolize_attrs(node['nxlog']['destinations'] || {}).each_pair do |name, values|
+  config_filenames << "10_op_#{name}.conf"
   nxlog_destination name do
     values.each_pair do |key, value|
       public_send(key, value)
@@ -52,5 +74,14 @@ symbolize_attrs(node['nxlog']['papertrails'] || {}).each_pair do |name, values|
     values.each_pair do |key, value|
       public_send(key, value)
     end
+  end
+end
+
+Dir["#{node.default['nxlog']['conf_dir']}/nxlog.conf.d/*")].each do |path|
+  config_filename = Pathname.new(path).basename.to_s
+  next if config_filenames.include?(config_filename)
+  file path do
+    action :delete
+    notifies :restart, 'service[nxlog]', :delayed
   end
 end
