@@ -31,7 +31,7 @@ action :create do
 
     # common parameters
     params = []
-    params << ['Module', n.input_module]
+    params << ['Module', n.module]
     params.push(*n.exec) if n.exec
 
     # module-specific parameters

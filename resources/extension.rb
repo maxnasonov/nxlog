@@ -23,7 +23,7 @@ default_action :create
 attribute :name, name_attribute: true, kind_of: String, required: true
 
 # global parameters
-attribute :input_module, kind_of: String, required: true,
+attribute :module, kind_of: String, required: true,
                          equal_to: %w(xm_syslog xm_gelf xm_fileop
                                       xm_multiline)
 attribute :exec, kind_of: [String, Array]
