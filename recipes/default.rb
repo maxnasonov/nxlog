@@ -60,9 +60,6 @@ else
   end
 end
 
-service 'nxlog' do
-  action [:enable, :start]
-end
 
 directory "#{Chef::Config[:file_cache_path]}/nxlog.conf.d"
 
@@ -95,4 +92,8 @@ file "#{node['nxlog']['conf_dir']}/nxlog.conf" do
   content config_content
 
   notifies :restart, 'service[nxlog]', :delayed
+end
+
+service 'nxlog' do
+  action [:enable, :start]
 end
