@@ -91,6 +91,10 @@ action :create do
       params << ['UTF8', n.utf8.to_s.upcase] unless n.utf8.nil?
 
     when 'im_msvistalog'
+      params << ['SavePos',
+                 n.save_pos] unless n.save_pos.nil?
+      params << ['ReadFromLast',
+                 n.read_from_last] unless n.read_from_last.nil?
       params << ['Query', n.query] unless n.query.nil?
       params << ['Channel', n.channel] unless n.channel.nil?
       params << ['PollInterval', n.poll_interval] unless n.poll_interval.nil?
