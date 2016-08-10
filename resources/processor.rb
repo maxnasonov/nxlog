@@ -23,6 +23,6 @@ default_action :create
 attribute :name, name_attribute: true, kind_of: String, required: true
 
 # global parameters
-attribute :input_module, kind_of: String, default: 'pm_null', required: true,
+attribute :module, kind_of: String, default: 'pm_null', required: true,
                          equal_to: %w(pm_null)
 attribute :exec, kind_of: [String, Array]
