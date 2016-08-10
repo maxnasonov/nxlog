@@ -87,7 +87,7 @@ include_recipe 'nxlog::resources_from_attributes'
 
 config_content = ""
 
-Dir["#{Chef::Config[:file_cache_path]}/nxlog.conf.d/*"].each do |path|
+Dir["#{Chef::Config[:file_cache_path].gsub('\\', '/')}/nxlog.conf.d/*"].each do |path|
   config_content += File.open(path, 'r').read
 end
 
