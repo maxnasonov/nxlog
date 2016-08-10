@@ -64,6 +64,8 @@ service 'nxlog' do
   action [:enable, :start]
 end
 
+directory "#{Chef::Config[:file_cache_path]}/nxlog.conf.d"
+
 template "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/0_nxlog.conf" do
   source 'nxlog.conf.erb'
 
@@ -82,7 +84,6 @@ end
 
 include_recipe 'nxlog::resources_from_attributes'
 
-directory "#{Chef::Config[:file_cache_path]}/nxlog.conf.d"
 
 config_content = ""
 
