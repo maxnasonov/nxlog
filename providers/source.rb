@@ -32,7 +32,7 @@ action :create do
     # common parameters
     params = []
     params << ['Module', n.input_module]
-    params.push(*n.exec) if n.exec
+    params.push(*[*n.exec].map{ |x| ["Exec", x] }) if n.exec
     params << ['InputType', n.input_type] if n.input_type
     params << ['FlowControl',
                n.flow_control.to_s.upcase] unless n.flow_control.nil?

@@ -32,7 +32,7 @@ action :create do
     # common parameters
     params = []
     params << ['Module', n.module]
-    params.push(*n.exec) if n.exec
+    params.push(*[*n.exec].map{ |x| ["Exec", x] }) if n.exec
 
     # module-specific parameters
     case n.module
