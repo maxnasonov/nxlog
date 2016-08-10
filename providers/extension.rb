@@ -35,7 +35,7 @@ action :create do
     params.push(*n.exec) if n.exec
 
     # module-specific parameters
-    case n.input_module
+    case n.module
 
     when 'im_multiline'
       params << ['Headerline', n.headerline]
