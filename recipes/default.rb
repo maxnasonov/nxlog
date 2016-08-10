@@ -70,7 +70,7 @@ template "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/0_nxlog.conf" do
   notifies :restart, 'service[nxlog]', :delayed
 end
 
-directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d"
+directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d" do
   action :delete
   recursive true
 end
