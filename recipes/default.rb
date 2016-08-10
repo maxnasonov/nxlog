@@ -71,6 +71,9 @@ template "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/0_nxlog.conf" do
 end
 
 directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d"
+  action :delete
+  recursive true
+end
 
 # delete logging components that aren't converged as part of this chef run
 zap_directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d" do
@@ -78,6 +81,8 @@ zap_directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d" do
 end
 
 include_recipe 'nxlog::resources_from_attributes'
+
+directory "#{Chef::Config[:file_cache_path]}/nxlog.conf.d"
 
 config_content = ""
 
