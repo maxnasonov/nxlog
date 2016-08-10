@@ -7,12 +7,12 @@ Pidfile   %ROOT%/data/nxlog.pid
 SpoolDir  %ROOT%/data
 
 <% # this seems wrong, but it's what works -%>
-Include   %ROOT%/conf/nxlog.conf.d/\\*.conf
+#Include   %ROOT%/conf/nxlog.conf.d/\\*.conf
 <% else %>
 User      <%= node['nxlog']['user'] %>
 Group     <%= node['nxlog']['group'] %>
 
-Include   <%= node['nxlog']['conf_dir'] %>/nxlog.conf.d/*.conf
+#Include   <%= node['nxlog']['conf_dir'] %>/nxlog.conf.d/*.conf
 <% end %>
 
 LogLevel  <%= node['nxlog']['log_level'] %>

@@ -64,7 +64,7 @@ service 'nxlog' do
   action [:enable, :start]
 end
 
-template "#{node['nxlog']['conf_dir']}/nxlog.conf" do
+template "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/0_nxlog.conf" do
   source 'nxlog.conf.erb'
 
   notifies :restart, 'service[nxlog]', :delayed
@@ -78,3 +78,15 @@ zap_directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d" do
 end
 
 include_recipe 'nxlog::resources_from_attributes'
+
+config_content = ""
+
+Dir["#{Chef::Config[:file_cache_path]}/nxlog.conf.d/*"].each do |path|
+  config_content += File.open(path, 'r').read
+end
+
+file "#{node['nxlog']['conf_dir']}/nxlog.conf" do
+  content config_content
+
+  notifies :restart, 'service[nxlog]', :delayed
+end

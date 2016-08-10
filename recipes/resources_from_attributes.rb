@@ -76,12 +76,3 @@ symbolize_attrs(node['nxlog']['papertrails'] || {}).each_pair do |name, values|
     end
   end
 end
-
-Dir["#{node.default['nxlog']['conf_dir']}/nxlog.conf.d/*"].each do |path|
-  config_filename = Pathname.new(path).basename.to_s
-  next if config_filenames.include?(config_filename)
-  file path do
-    action :delete
-    notifies :restart, 'service[nxlog]', :delayed
-  end
-end
