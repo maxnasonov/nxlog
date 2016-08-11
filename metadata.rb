@@ -1,5 +1,5 @@
 name             'nxlog'
-version          '0.2.7'
+version          '0.2.8'
 
 description      'Installs and configures NXLog_ce on Linux or Windows'
 long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))

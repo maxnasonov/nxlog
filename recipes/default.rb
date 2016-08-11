@@ -72,7 +72,7 @@ end
 directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d"
 
 # delete logging components that aren't converged as part of this chef run
-zap_directory "#{node['nxlog']['conf_dir']}/nxlog.conf.d" do
+zap_directory "#{Chef::Config[:file_cache_path]}/nxlog.conf.d" do
   pattern '*.conf'
 end
 
