@@ -37,7 +37,7 @@ action :create do
     # module-specific parameters
     case n.module
 
-    when 'im_multiline'
+    when 'xm_multiline'
       params << ['Headerline', n.headerline]
 
     else
