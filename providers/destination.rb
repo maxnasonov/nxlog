@@ -22,7 +22,7 @@ def whyrun_supported?
 end
 
 def config_filename(name)
-  "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/10_op_#{name}.conf"
+  "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/30_op_#{name}.conf"
 end
 
 

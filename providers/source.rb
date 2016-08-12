@@ -22,7 +22,7 @@ def whyrun_supported?
 end
 
 def config_filename(name)
-  "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/20_ip_#{name}.conf"
+  "#{Chef::Config[:file_cache_path]}/nxlog.conf.d/40_ip_#{name}.conf"
 end
 
 action :create do
