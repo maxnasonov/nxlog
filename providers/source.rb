@@ -74,7 +74,7 @@ action :create do
       params << ['ActiveFiles',
                  n.active_files] unless n.active_files.nil?
 
-      params << ['File', n.file =~ /["']/ ? n.file : "\"#{n.file}\""]
+      params << ['File', n.file =~ /["']/ ? n.file : "'#{n.file}'"]
 
     when 'im_internal'
       # nothing to do!
