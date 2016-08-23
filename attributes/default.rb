@@ -23,7 +23,7 @@ default['nxlog']['log_level'] = 'INFO'
 default['nxlog']['user'] = 'nxlog'
 default['nxlog']['group'] = 'nxlog'
 
-default['nxlog']['package_source'] = 'http://nxlog.co/system/files/products/files/1'
+default['nxlog']['package_source'] = 'https://nxlog.co/system/files/products/files/1'
 
 case node['platform_family']
 when 'debian'
